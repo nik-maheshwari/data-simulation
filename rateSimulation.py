@@ -88,7 +88,7 @@ if __name__ == '__main__':
         # kernel density estimation using Gaussian kernels
         kde = pool.starmap(gaussian_kde, ((data, "scott"),))
         
-        # evaluate the probability distribution of 'kde' at each point in 'x_grid'
+        # evaluate the probability density of 'kde' at each point in 'x_grid'
         kdepdf = kde[0].evaluate(x_grid[0]) 
         
         # get cumulative sum
@@ -101,7 +101,7 @@ if __name__ == '__main__':
         values = np.random.rand(samples)
         
         # find indices in 'cdf' where elements of 'values' should be inserted 
-        #  to maintain order in 'cdf'
+        #  to maintain order in 'cdf' (hence maintaining the distribution)
         value_bins = pool.starmap(np.searchsorted, ((cdf, values),))
         
         # pick values of indices 'value_bins' in 'x_grid'
